@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CStopoconstrucciones | Gestión de Calidad SaaS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">CS<span>topoconstrucciones</span></h1>
+            <p style="color: var(--text-muted);">Auditoría Técnica de Satisfacción al Cliente</p>
+        </header>
+
+        <section class="dashboard-grid">
+            <div class="stat-card">
+                <span class="stat-label">Índice de Calidad</span>
+                <span id="stat-avg" class="stat-value">0.0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Encuestas Totales</span>
+                <span id="stat-total" class="stat-value">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Estado del Sistema</span>
+                <span class="stat-value" style="color: var(--accent); font-size: 1.5rem; margin-top: 15px;" aria-label="Estado activo">ACTIVO</span>
+            </div>
+        </section>
+
+        <div class="wizard-card">
+            <div class="progress-bar"><div id="progress-fill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso del formulario"></div></div>
+
+            <div class="wizard-content">
+                <form id="mainForm" novalidate>
+                    <!-- Paso 1: Identificación -->
+                    <div class="step active" data-step="1" aria-labelledby="step1-heading">
+                        <h2 id="step1-heading">1. Identificación del Cliente</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="c_name">Nombre Completo *</label>
+                                <input type="text" id="c_name" required placeholder="Ej: Ing. Mauricio Gómez" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="c_company">Empresa (Opcional)</label>
+                                <input type="text" id="c_company" placeholder="Ej: Constructora Horizonte">
+                            </div>
+                            <div class="form-group">
+                                <label for="c_phone">Teléfono *</label>
+                                <input type="tel" id="c_phone" required placeholder="3013611950" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="c_email">Correo Electrónico *</label>
+                                <input type="email" id="c_email" required placeholder="gerencia@empresa.com" aria-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Evaluación Técnica -->
+                    <div class="step" data-step="2" aria-labelledby="step2-heading">
+                        <h2 id="step2-heading">2. Evaluación Técnica</h2>
+                        <div id="questions-list" role="group" aria-label="Preguntas de evaluación"></div>
+                    </div>
+
+                    <!-- Paso 3: Calificación Final -->
+                    <div class="step" data-step="3" aria-labelledby="step3-heading">
+                        <h2 id="step3-heading">3. Calificación Final</h2>
+                        <div class="star-rating-container">
+                            <label style="margin-bottom: 20px; display: block; font-size: 1.1rem;">¿Qué calificación general le da a nuestro servicio?</label>
+                            <div class="star-rating" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
+                                <input type="radio" name="rating" id="star5" value="5">
+                                <label for="star5" aria-label="5 estrellas">★</label>
+                                <input type="radio" name="rating" id="star4" value="4">
+                                <label for="star4" aria-label="4 estrellas">★</label>
+                                <input type="radio" name="rating" id="star3" value="3">
+                                <label for="star3" aria-label="3 estrellas">★</label>
+                                <input type="radio" name="rating" id="star2" value="2">
+                                <label for="star2" aria-label="2 estrellas">★</label>
+                                <input type="radio" name="rating" id="star1" value="1">
+                                <label for="star1" aria-label="1 estrella">★</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="c_comment">Comentario o Recomendación (Opcional)</label>
+                            <textarea id="c_comment" rows="4" placeholder="Su opinión es fundamental para mejorar..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- reCAPTCHA -->
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LcyVcosAAAAAJij4SbkHl5_DkVs1wW98wTU2rhy"></div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-prev" id="btnPrev" style="visibility: hidden;" aria-label="Paso anterior">Atrás</button>
+                        <button type="button" class="btn btn-next" id="btnNext" aria-label="Paso siguiente">Continuar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section>
+            <h2 style="display: flex; align-items: center; gap: 10px;">
+                <i data-lucide="message-square"></i> Reseñas de Clientes
+            </h2>
+            <div id="reviews-container">
+                <p style="text-align: center; color: var(--text-muted); padding: 40px;">Cargando base de datos...</p>
+            </div>
+        </section>
+
+        <footer>
+            <h3>¿Necesitas soporte técnico?</h3>
+            <div class="contact-links">
+                <a href="tel:3007048443"><i data-lucide="phone"></i> 300 704 8443</a>
+                <a href="mailto:topoconstruccionesstm@gmail.com"><i data-lucide="mail"></i> topoconstruccionesstm@gmail.com</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.8rem; color: var(--text-muted);">© 2026 CStopoconstrucciones | Ingeniería y Precisión</p>
+        </footer>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- Módulos de JavaScript -->
+    <script type="module" src="security.js"></script>
+    <script type="module" src="validation.js"></script>
+    <script type="module" src="ui.js"></script>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
